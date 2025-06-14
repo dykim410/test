@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 F/W Fashion Trends</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link href="./style.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>" />
+
+    <style>
+   
+        * {
+            box-sizing: border-box;
+        }
+
+        .section-content > img {
+            overflow: hidden;
+            width: 100%;
+            padding-top: 50px;
+            height: auto;
+        }
+
+        #wrap {
+            min-height: 100vh;
+            position: relative;
+            width: 100%;
+        }
+
+        #footer {
+            position: relative;
+            height: 100px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top: black dashed 1px;
+            overflow: hidden;
+            width: 100%;
+            margin-top: 50px;
+        }
+
+     
+        .footer-left-bottom {
+            position: absolute;
+            bottom: 10px; 
+            left: 20px; 
+            color: var(--color-dark-gray);
+            font-size: 12px;
+        }
+
+    
+        .footer-right-top {
+            position: absolute;
+            top: 15px; 
+            right: 20px;
+            display: flex;
+            gap: 20px; 
+            color: var(--color-dark-gray);
+            font-size: 14px;
+        }
+
+        .footer-right-top span {
+            white-space: nowrap;
+            cursor: pointer; 
+        }
+        .footer-right-top span:hover {
+            text-decoration: underline; 
+        }
+
+
+        #fttext {
+            vertical-align: middle;
+        }
+
+        
+        .dress-up-game-section {
+            max-width: 1404px;
+            padding: 20px 100px 100px 100px; 
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 530px; 
+            max-height: 620px; 
+            border: 2px dashed var(--color-dark-gray); 
+            border-radius: 8px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+            background-color: var(--color-white);
+            margin: 100px auto;
+            position: relative; 
+            overflow: hidden; 
+        }
+
+    
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-light-gray); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10; 
+            opacity: 1; 
+            transition: opacity 0.5s ease-out; 
+        }
+
+       
+        .spinner {
+            border: 4px dashed rgba(0, 0, 0, 0.1); 
+            border-top: 4px solid var(--color-light-gray); 
+            border-radius: 50%;
+            width: 50px; 
+            height: 50px;
+            animation: spin 1s linear infinite; 
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .game-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 90%;
+            max-width: 1200px;
+            gap: 30px;
+            margin-top: 50px;
+            transform: translateY(15%); 
+        }
+
+        @media (min-width: 1001px) {
+            .game-container {
+                flex-wrap: nowrap;
+            }
+            .clothing-options {
+                width: 600px;
+                height: 450px;
+                margin-top: -140px;
+                flex-shrink: 0;
+            }
+            .character-area {
+                width: 270px;
+                height: 400px;
+                margin-top: -88px;
+                margin-right: 100px;
+                flex-shrink: 0;
+            }
+            .spacer2 {
+                margin-bottom: 30px !important;
+                transform: translateY(5%); 
+            }
+        }
+
+        @media (min-width: 1001px) and (max-width: 1244px) {
+            #resetOutfitButton {
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                bottom: -55px !important;
+            }
+        }
+
+        .clothing-options {
+            position: relative;
+            background-image: url('game2/bg4.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .character-area {
+            position: relative;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px dashed #0D0D0D;
+            border-radius: 8px;
+            background-color: var(--color-white);
+        }
+
+        .overlay-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #character-base { z-index: 1; opacity: 1; }
+        #character-pants { z-index: 2; }
+        #character-shoes { z-index: 3; }
+        #character-top { z-index: 4; }
+        #character-bag { z-index: 6; }
+        #character-jacket { z-index: 5; }
+        #character-hat { z-index: 7; }
+
+        .draggable-item {
+            width: 100px;
+            height: auto;
+            cursor: grab;
+            padding: 5px;
+            transition: transform 0.1s ease-out;
+            user-select: none;
+            -webkit-user-drag: none;
+            position: absolute;
+            pointer-events: auto; 
+        }
+
+        .draggable-item:hover {
+            transform: scale(1.1);
+            cursor: grab;
+        }
+
+        .draggable-item:active {
+            cursor: grabbing;
+            transform: scale(1.05);
+        }
+
+    
+        img.draggable-item[data-type="top"] { width: 120px; height: 120px; object-fit: contain; }
+        img.draggable-item[data-type="jacket"] { width: 150px; height: 150px; object-fit: contain; }
+        img.draggable-item[data-type="pants"] { width: 120px; height: 140px; object-fit: contain; }
+        img.draggable-item[data-type="hat"] { width: 80px; height: 100px; object-fit: contain; }
+        img.draggable-item[data-type="shoes"] { width: 100px; height: 150px; object-fit: contain; }
+        img.draggable-item[data-type="bag"] { width: 100px; height: 100px; object-fit: contain; }
+
+
+        #resetOutfitButton {
+            position: absolute;
+            bottom: 0px;
+            left: -80px;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: var(--color-white);
+            color: var(--color-dark-gray);
+            border: 2px dashed var(--color-dark-gray);
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+            z-index: 9;
+        }
+
+        #resetOutfitButton:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transform: translateX(-50%) scale(1.05);
+        }
+
+        @media (max-width: 1000px) {
+            .game-container {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                max-width: none;
+                gap: 10px;
+                flex-wrap: wrap;
+                margin-top: -100px;
+            }
+
+            .character-area {
+                width: 90%;
+                max-width: 150px;
+                min-height: 300px;
+                margin: 0 auto !important;
+                margin-bottom: 30px !important;
+            }
+
+            .clothing-options {
+                width: 90%;
+                max-width: 600px;
+                height: auto;
+                margin: 0 auto !important;
+            }
+
+            .draggable-items-scaling-wrapper {
+                position: relative;
+                width: 600px;
+                height: 450px;
+                transform: scale(0.6);
+                transform-origin: top center;
+                margin-bottom: -180px;
+            }
+
+            .dress-up-game-section {
+                min-height: 1050px;
+                max-height: none;
+            
+            }
+
+            
+        }
+
+        @media (max-width: 768px) {
+            .dress-up-game-section {
+                padding-left: 20px;
+                padding-right: 20px;
+                min-height: 950px;
+            }
+            .character-area {
+                max-width: 200px;
+            }
+            .clothing-options {
+                max-width: 400px;
+            }
+            .draggable-items-scaling-wrapper {
+                transform: scale(0.5) translateX(-100px);
+                margin-bottom: -225px;
+            }
+        }
+
+        .spacer2 {
+            height: 200px !important;
+            text-align: center;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            white-space: nowrap;
+            margin-top: 0px;
+            margin-bottom: 70px;
+            margin-right: 55px;
+            color: var(--color-dark-gray);
+        }
+
+        .spacer2 span {
+            display: inline-block;
+            min-width: 0.5em;
+        }
+
+        #scrollIndicatorContainer {
+            text-align: center;
+            margin-top: 0px;
+            margin-bottom: -70px;
+        }
+
+        #scrollIcon {
+            display: block;
+            margin: 0 auto;
+            width: 48px;
+            height: 48px;
+            color: var(--color-light-gray);
+        }
+        
+        @keyframes blink-scroll-icon {
+            0% { opacity: 1; }
+            50% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+        
+
+        .blank {
+            height: 276px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spacer3 {
+            height: 70px;
+            text-align: center;
+            font-size: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            white-space: nowrap;
+            margin: 0px;
+            color: var(--color-dark-gray);
+        }
+
+        #heartClickContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 497px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            z-index: 1;
+        }
+
+        .heart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+        }
+
+        .heart-container:hover {
+            transform: scale(1.05);
+        }
+
+        .heart-icon {
+            width: 60px;
+            height: 60px;
+            color: var(--color-dark-gray);
+            fill: none;
+            cursor: pointer;
+            transition: fill 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .heart-icon.filled {
+            fill: var(--color-dark-gray);
+            color: var(--color-dark-gray);
+        }
+
+        .thank-you-message {
+            font-size: 15pt;
+            color: var(--color-dark-gray);
+            opacity: 0;
+            margin-top: 5px;
+            white-space: nowrap;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+       
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000; 
+            opacity: 0; 
+            visibility: hidden; 
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        
+        .modal-content {
+            background-color: var(--color-white);
+            padding: 30px;
+            border-radius: 12px; 
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%; 
+            text-align: center;
+            position: relative;
+            border: 2px dashed var(--color-dark-gray); 
+            transform: translateY(-20px); 
+            opacity: 0; 
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .modal-overlay.visible .modal-content {
+            transform: translateY(0); 
+            opacity: 1;
+        }
+
+        .modal-content h2 {
+            color: var(--color-dark-gray);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            color: var(--color-dark-gray);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+
+        /* Close Button Styles */
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            color: var(--color-dark-gray);
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .close-button:hover {
+            color: var(--color-red); 
+        }
+
+        @media (max-width: 600px) {
+            .modal-content {
+                padding: 20px;
+                width: 95%;
+            }
+            .modal-content h2 {
+                font-size: 20px;
+            }
+            .modal-content p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div id="wrap">
+    <header class="main-header fixed-header">
+        <div class="logo">
+            <a href="index.html">2025 F/W Fashion Trends</a>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="color.html"> Color</a></li>
+                <li><a href="material.html">Material</a></li>
+                <li><a href="style.html"> Style</a></li>
+                <li><a href="acc.html">Acc</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="section-content" id="TOP">
+        <img src="bgimage.png" alt="Background Image">
+    </section>
+
+    <section class="blank"></section>
+
+    <section class="spacer3">Trend Preview</section>
+
+    <section id="scrollIndicatorContainer">
+       
+        <svg id="scrollIcon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="7 13 12 18 17 13"></polyline>
+            <polyline points="7 6 12 11 17 6"></polyline>
+        </svg>
+    </section>
+
+    <section class="blank"></section>
+
+    <section id="dressUpGameSection" class="dress-up-game-section">
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="spinner"></div>
+        </div>
+        <section id="animatedTextContainer" class="spacer2">
+            아이템을 드래그해서 옷을 입혀주세요-!
+        </section>
+        <div class="game-container">
+            <div class="character-area">
+                <button id="resetOutfitButton">Reset</button>
+                <img id="character-base" class="character-image overlay-item" src="game2/human.png" alt="Character Base">
+                <img id="character-hat" class="overlay-item" src="" alt="Hat Layer">
+                <img id="character-jacket" class="overlay-item" src="" alt="Jacket Layer">
+                <img id="character-top" class="overlay-item" src="" alt="Top Layer">
+                <img id="character-pants" class="overlay-item" src="" alt="Pants Layer">
+                <img id="character-shoes" class="overlay-item" src="" alt="Shoes Layer">
+                <img id="character-bag" class="overlay-item" src="" alt="Bag Layer">
+            </div>
+
+            <div class="clothing-options">
+                <div class="draggable-items-scaling-wrapper">
+                    <img id="item-top1" class="draggable-item" src="game2/bold.png" data-type="top" data-item-src="game2/boldon.png" alt="Top A" style="top: 125px; left: 20px;">
+                    <img id="item-top2" class="draggable-item" src="game2/tiedknit.png" data-type="top" data-item-src="game2/tiedkniton.png" alt="Top B" style="top: 122px; left: 60px;">
+                    <img id="item-top3" class="draggable-item" src="game2/pistop.png" data-type="top" data-item-src="game2/pistopon.png" alt="Top C" style="top: 118px; left: 100px;">
+                    <img id="item-top4" class="draggable-item" src="game2/dot.png" data-type="top" data-item-src="game2/doton.png" alt="Top D" style="top: 112px; left: 140px;">
+
+                    <img id="item-jacket1" class="draggable-item" src="game2/duvet1.png" data-type="jacket" data-item-src="game2/duveton1.png" alt="Jacket X" style="top: 115px; left: 180px;">
+                    <img id="item-jacket2" class="draggable-item" src="game2/coat.png" data-type="jacket" data-item-src="game2/coaton.png" alt="Jacket Y" style="top: 115px; left: 235px;">
+                    <img id="item-jacket3" class="draggable-item" src="game2/coat2.png" data-type="jacket" data-item-src="game2/coaton4.png" alt="Jacket Z" style="top: 115px; left: 285px;">
+                    <img id="item-jacket4" class="draggable-item" src="game2/coat3.png" data-type="jacket" data-item-src="game2/coaton3.png" alt="Jacket W" style="top: 115px; left: 335px;">
+
+                    <img id="item-hat1" class="draggable-item" src="game2/muffler.png" data-type="hat" data-item-src="game2/muffleron.png" alt="Muffler 1" style="top: 130px; left: 420px;">
+                    <img id="item-hat2" class="draggable-item" src="game2/ribbon.png" data-type="hat" data-item-src="game2/ribbonon.png" alt="Hat 1" style="top: 105px; left: 480px;">
+
+                    <img id="item-shoes1" class="draggable-item" src="game2/shoes.png" data-type="shoes" data-item-src="game2/shoeson.png" alt="Shoes 1" style="top: 280px; left: 450px;">
+                    <img id="item-shoes2" class="draggable-item" src="game2/shoes2.png" data-type="shoes" data-item-src="game2/shoeson3.png" alt="Shoes 2" style="top: 250px; left: 335px;">
+                    <img id="item-shoes3" class="draggable-item" src="game2/shoes4.png" data-type="shoes" data-item-src="game2/shoeson5.png" alt="Shoes 3" style="top: 290px; left: 385px;">
+                    <img id="item-shoes4" class="draggable-item" src="game2/shoes5.png" data-type="shoes" data-item-src="game2/shoeson4.png" alt="Shoes 4" style="top: 270px; left: 275px;">
+
+                    <img id="item-bag1" class="draggable-item" src="game2/bag1.png" data-type="bag" data-item-src="game2/bagon.png" alt="Bag P" style="top: 165px; left: 480px;">
+                    <img id="item-bag2" class="draggable-item" src="game2/bag2.png" data-type="bag" data-item-src="game2/bagon3.png" alt="Bag Q" style="top: 250px; left: 450px;">
+
+                    <img id="item-pants1" class="draggable-item" src="game2/denim.png" data-type="pants" data-item-src="game2/denimon.png" alt="Pants 1" style="top: 248px; left: 15px;">
+                    <img id="item-pants2" class="draggable-item" src="game2/denim2.png" data-type="pants" data-item-src="game2/denimon2.png" alt="Pants 2" style="top: 246px; left: 65px;">
+                    <img id="item-pants3" class="draggable-item" src="game2/lace1.png" data-type="pants" data-item-src="game2/laceon.png" alt="Pants 3" style="top: 250px; left: 115px;">
+                    <img id="item-pants4" class="draggable-item" src="game2/lace2.png" data-type="pants" data-item-src="game2/laceon2.png" alt="Pants 4" style="top: 245px; left: 160px;">
+                    <img id="item-pants5" class="draggable-item" src="game2/lace3.png" data-type="pants" data-item-src="game2/laceon3.png" alt="Pants 5" style="top: 250px; left: 212px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="heartClickContainer">
+        <div class="heart-container">
+            <svg id="heartIcon" class="heart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <div id="thankYouText" class="thank-you-message"></div>
+        </div>
+    </section>
+
+    <section class="section-content">
+        <div id="footer">
+         
+            <div class="footer-left-bottom">
+                2021111673 김도연
+            </div>
+            <div class="footer-middle">
+                <div id="top"><a href="#TOP">To the top</a></div> 
+            </div>
+         
+            <div class="footer-right-top">
+                <span>step2057@swu.ac.kr</span>
+                <span id="aboutWebsiteLink">About the website</span>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+<div id="aboutModal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>About This Website</h2>
+        
+        <p>서울여자대학교 2025-1학기 [웹페이지저작기초]<br>기말 과제를 위해 제작된 웹페이지입니다.</p>
+        <p>사용된 모든 이미지는 Chat GPT를 활용해 생성하였으며,<br>본 페이지는 상업적 용도가 없습니다.</p>
+            
+        
+    </div>
+</div>
+
+<script type="module">
+    console.log('--- Script execution started ---');
+
+    AOS.init();
+    console.log('AOS initialized.');
+
+    // =====================================================================
+    // 옷입히기 게임 스크립트 시작
+    // =====================================================================
+
+    let currentDraggable = null;
+    let clickOffsetFromItemLeft = 0; 
+    let clickOffsetFromItemTop = 0; 
+    let originalParent = null;
+    console.log('Global variables declared and initialized:', {currentDraggable, clickOffsetFromItemLeft, clickOffsetFromItemTop, originalParent});
+
+    const characterBaseImage = document.getElementById('character-base');
+    const draggableItems = document.querySelectorAll('.draggable-item');
+    const characterArea = document.querySelector('.character-area');
+    const resetOutfitButton = document.getElementById('resetOutfitButton');
+    console.log('DOM elements selected: characterBaseImage, draggableItems, characterArea, resetOutfitButton');
+
+    const overlayLayers = {
+        'hat': document.getElementById('character-hat'),
+        'jacket': document.getElementById('character-jacket'),
+        'top': document.getElementById('character-top'),
+        'pants': document.getElementById('character-pants'),
+        'shoes': document.getElementById('character-shoes'),
+        'bag': document.getElementById('character-bag')
+    };
+    console.log('Overlay layers collected.');
+
+    const initialDraggableStyles = new Map();
+    const dressedItemsMap = new Map();
+    console.log('Maps for styles and dressed items initialized.');
+
+    const heartIcon = document.getElementById('heartIcon');
+    const thankYouText = document.getElementById('thankYouText');
+    let isHeartClickedInProgress = false;
+
+  
+    const aboutWebsiteLink = document.getElementById('aboutWebsiteLink');
+    const aboutModal = document.getElementById('aboutModal');
+    const closeModalButton = document.querySelector('#aboutModal .close-button');
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('DOMContentLoaded event fired.');
+        draggableItems.forEach(item => {
+            const computedStyle = window.getComputedStyle(item);
+            initialDraggableStyles.set(item.id, {
+                position: computedStyle.position,
+                left: item.style.left,
+                top: item.style.top,
+                right: item.style.right,
+                bottom: item.style.bottom,
+                display: computedStyle.display,
+                zIndex: computedStyle.zIndex,
+                pointerEvents: computedStyle.pointerEvents
+            });
+            console.log(`Initial draggable item styles stored for ${item.id}:`, initialDraggableStyles.get(item.id));
+        });
+        console.log('All initial draggable item styles stored.');
+
+        setupAndStartTextWaveAnimation();
+        startScrollIconBlinkAnimation();
+        console.log('Text wave and scroll icon animations started.');
+
+        const dressUpGameSection = document.getElementById('dressUpGameSection');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        let hasLoadedGameSection = false;
+
+        if (dressUpGameSection && loadingOverlay) {
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const gameSectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !hasLoadedGameSection) {
+                        hasLoadedGameSection = true;
+                        console.log('Dress-up game section is now visible.');
+                        setTimeout(() => {
+                            loadingOverlay.style.opacity = '0';
+                            loadingOverlay.addEventListener('transitionend', () => {
+                                loadingOverlay.style.display = 'none';
+                                console.log('Loading overlay faded out and hidden.');
+                            }, { once: true });
+                        }, 1000);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            gameSectionObserver.observe(dressUpGameSection);
+            console.log('IntersectionObserver for dress-up game section initiated.');
+        }
+
+        if (heartIcon) {
+            heartIcon.addEventListener('click', handleHeartClick);
+            console.log("Heart icon click listener attached.");
+        } else {
+            console.error("Error: heartIcon element not found!");
+        }
+
+   
+        if (aboutWebsiteLink) {
+            aboutWebsiteLink.addEventListener('click', () => {
+                aboutModal.classList.add('visible');
+                console.log('About modal shown.');
+            });
+        }
+        if (closeModalButton) {
+            closeModalButton.addEventListener('click', () => {
+                aboutModal.classList.remove('visible');
+                console.log('About modal hidden by close button.');
+            });
+        }
+        if (aboutModal) {
+            aboutModal.addEventListener('click', (e) => {
+                if (e.target === aboutModal) { 
+                    aboutModal.classList.remove('visible');
+                    console.log('About modal hidden by overlay click.');
+                }
+            });
+        }
+    }); 
+
+    draggableItems.forEach(item => {
+        item.addEventListener('mousedown', startDrag);
+        item.addEventListener('touchstart', startDrag, { passive: false });
+        console.log(`Event listeners attached to draggable item: ${item.id}`);
+    });
+    console.log('All draggable items processed for event listeners.');
+
+    resetOutfitButton.addEventListener('click', resetOutfit);
+    console.log('Reset button event listener attached.');
+
+    /**
+     * 드래그 시작 함수 (PC 및 모바일 지원)
+     * @param {Event} e - 마우스 또는 터치 이벤트 객체
+     */
+    function startDrag(e) {
+        console.log('startDrag triggered for:', e.target.id);
+        console.log('Type of currentDraggable BEFORE assignment (inside startDrag):', typeof currentDraggable);
+        try {
+            e.preventDefault();
+
+            currentDraggable = e.target;
+            console.log('currentDraggable assigned (inside startDrag):', currentDraggable);
+
+            const rect = currentDraggable.getBoundingClientRect();
+            console.log(`Initial element rect: x=${rect.left}, y=${rect.top}, w=${rect.width}, h=${rect.height}`);
+
+            const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+            console.log(`Initial mouse click coords: (${clientX}, ${clientY})`);
+
+       
+            clickOffsetFromItemLeft = clientX - rect.left;
+            clickOffsetFromItemTop = clientY - rect.top;
+            console.log(`Calculated click offsets from item top-left: (${clickOffsetFromItemLeft}, ${clickOffsetFromItemTop})`);
+
+            originalParent = currentDraggable.parentNode;
+            console.log('Original parent captured:', originalParent.id || originalParent.tagName);
+
+            document.body.appendChild(currentDraggable);
+            currentDraggable.style.position = 'fixed';
+            currentDraggable.style.zIndex = '1000';
+            currentDraggable.style.pointerEvents = 'none';
+            console.log('Item moved to body, position fixed, pointer-events none.');
+
+            currentDraggable.style.width = rect.width + 'px';
+            currentDraggable.style.height = rect.height + 'px';
+            currentDraggable.style.objectFit = 'contain';
+            currentDraggable.style.transform = 'none'; 
+            console.log(`Item fixed size set to: ${rect.width}x${rect.height}, transform removed.`);
+
+         
+            currentDraggable.style.left = (clientX - clickOffsetFromItemLeft) + 'px';
+            currentDraggable.style.top = (clientY - clickOffsetFromItemTop) + 'px';
+            console.log(`Item fixed position set to: (${currentDraggable.style.left}, ${currentDraggable.style.top})`);
+
+            anime({
+                targets: currentDraggable,
+                scale: [1, 1.1],
+                duration: 100,
+                easing: 'easeOutQuad'
+            });
+
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', endDrag);
+            document.addEventListener('touchmove', drag, { passive: false });
+            document.addEventListener('touchend', endDrag, { passive: false });
+            console.log('Drag started successfully. Global event listeners added.');
+
+        } catch (error) {
+            console.error("Error occurred in startDrag function:", error);
+        }
+    }
+
+    /**
+     * 드래그 중 함수 (PC 및 모바일 지원)
+     * @param {Event} e - 마우스 또는 터치 이벤트 객체
+     */
+    function drag(e) {
+        if (!currentDraggable) {
+            console.warn('drag called but currentDraggable is null.');
+            return;
+        }
+        if (e.type.includes('touch')) {
+            e.preventDefault();
+        }
+
+        const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+        const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+
+        currentDraggable.style.left = (clientX - clickOffsetFromItemLeft) + 'px';
+        currentDraggable.style.top = (clientY - clickOffsetFromItemTop) + 'px';
+    }
+
+    /**
+     * 드래그 종료 함수 (PC 및 모바일 지원)
+     * @param {Event} e - 마우스 또는 터치 이벤트 객체
+     */
+    function endDrag(e) {
+        if (!currentDraggable) {
+            console.warn('endDrag called but currentDraggable is null.');
+            return;
+        }
+        console.log('endDrag called for:', currentDraggable.id);
+
+        anime({
+            targets: currentDraggable,
+            scale: [1.1, 1],
+            duration: 100,
+            easing: 'easeOutQuad'
+        });
+
+        const draggableRect = currentDraggable.getBoundingClientRect();
+        const characterRect = characterArea.getBoundingClientRect();
+        console.log('Draggable item rect:', draggableRect, 'Character area rect:', characterRect);
+
+        const isOverCharacter = !(
+            draggableRect.right < characterRect.left ||
+            draggableRect.left > characterRect.left + characterRect.width || 
+            draggableRect.bottom < characterRect.top ||
+            draggableRect.top > characterRect.top + characterRect.height   
+        );
+        console.log('Is over character area:', isOverCharacter);
+
+        currentDraggable.style.removeProperty('width');
+        currentDraggable.style.removeProperty('height');
+        currentDraggable.style.removeProperty('object-fit');
+        currentDraggable.style.removeProperty('transform'); 
+        console.log('Removed inline width, height, object-fit, transform from currentDraggable.');
+
+        if (currentDraggable.parentNode === document.body) {
+            document.body.removeChild(currentDraggable);
+            console.log('Removed currentDraggable from body.');
+        } else {
+            console.log('currentDraggable was not in body, no need to remove.');
+        }
+
+        if (isOverCharacter) {
+            const itemSrc = currentDraggable.dataset.itemSrc;
+            const itemType = currentDraggable.dataset.type;
+
+            updateCharacterOutfit(itemSrc, itemType, currentDraggable);
+            currentDraggable.style.display = 'none';
+            console.log('Item dropped on character, outfit updated, item hidden.');
+        } else {
+            if (originalParent) {
+                originalParent.appendChild(currentDraggable);
+                const initialStyles = initialDraggableStyles.get(currentDraggable.id);
+                if (initialStyles) {
+                    currentDraggable.style.position = initialStyles.position;
+                    currentDraggable.style.left = initialStyles.left;
+                    currentDraggable.style.top = initialStyles.top;
+                    currentDraggable.style.right = initialStyles.right;
+                    currentDraggable.style.bottom = initialStyles.bottom;
+                    currentDraggable.style.display = initialStyles.display;
+                    currentDraggable.style.zIndex = initialStyles.zIndex;
+                    currentDraggable.style.pointerEvents = initialStyles.pointerEvents;
+                    
+                    currentDraggable.style.transform = initialStyles.transform || '';
+                    console.log('Item dropped outside character, restored to original position.');
+                } else {
+                    console.warn(`No initial styles found for ${currentDraggable.id} to restore.`);
+                }
+            } else {
+                console.warn('originalParent is null, cannot restore item to original position.');
+            }
+        }
+
+        currentDraggable = null;
+        clickOffsetFromItemLeft = 0;
+        clickOffsetFromItemTop = 0;
+        originalParent = null;
+        console.log('Drag process finalized, global variables reset.');
+
+        document.removeEventListener('mousemove', drag);
+        document.removeEventListener('mouseup', endDrag);
+        document.removeEventListener('touchmove', drag, { passive: false });
+        document.removeEventListener('touchend', endDrag, { passive: false });
+        console.log('Global event listeners removed.');
+    }
+
+    
+    function updateCharacterOutfit(newItemSrc, itemType, droppedItemElement) {
+        console.log(`Updating outfit for type: ${itemType} with item: ${newItemSrc}`);
+        const targetLayer = overlayLayers[itemType];
+
+        if (targetLayer) {
+            const previouslyDressedItem = dressedItemsMap.get(itemType);
+            console.log('Previously dressed item for this type:', previouslyDressedItem ? previouslyDressedItem.id : 'None');
+
+            if (previouslyDressedItem && previouslyDressedItem !== droppedItemElement) {
+                const initialStylesOfPrevious = initialDraggableStyles.get(previouslyDressedItem.id);
+                if (initialStylesOfPrevious) {
+                    if (previouslyDressedItem.parentNode === document.body) {
+                        document.body.removeChild(previouslyDressedItem);
+                        console.log(`Removed previously dressed item (${previouslyDressedItem.id}) from body.`);
+                    }
+                    const itemOriginalParentContainer = document.querySelector('.draggable-items-scaling-wrapper');
+                    if (itemOriginalParentContainer) {
+                        itemOriginalParentContainer.appendChild(previouslyDressedItem);
+                        console.log(`Appended previously dressed item (${previouslyDressedItem.id}) back to its original parent.`);
+                    } else {
+                        console.warn(`Could not find original parent (.draggable-items-scaling-wrapper) for ${previouslyDressedItem.id}`);
+                    }
+
+                    previouslyDressedItem.style.removeProperty('width');
+                    previouslyDressedItem.style.removeProperty('height');
+                    previouslyDressedItem.style.removeProperty('object-fit');
+                    previouslyDressedItem.style.removeProperty('transform'); 
+                    console.log(`Removed inline styles from previous item (${previouslyDressedItem.id}).`);
+
+                    anime({
+                        targets: previouslyDressedItem,
+                        left: initialStylesOfPrevious.left,
+                        top: initialStylesOfPrevious.top,
+                        right: initialStylesOfPrevious.right,
+                        bottom: initialStylesOfPrevious.bottom,
+                        opacity: [0, 1],
+                        scale: 1,
+                        duration: 300,
+                        easing: 'easeOutQuad',
+                        complete: function() {
+                            previouslyDressedItem.style.position = initialStylesOfPrevious.position;
+                            previouslyDressedItem.style.left = initialStylesOfPrevious.left;
+                            previouslyDressedItem.style.top = initialStylesOfPrevious.top;
+                            previouslyDressedItem.style.right = initialStylesOfPrevious.right;
+                            previouslyDressedItem.style.bottom = initialStylesOfPrevious.bottom;
+                            previouslyDressedItem.style.display = initialStylesOfPrevious.display;
+                            previouslyDressedItem.style.zIndex = initialStylesOfPrevious.zIndex;
+                            previouslyDressedItem.style.pointerEvents = initialStylesOfPrevious.pointerEvents;
+                            previouslyDressedItem.style.transform = initialStylesOfPrevious.transform || '';
+                            console.log(`Previous item (${previouslyDressedItem.id}) restored to original state.`);
+                        }
+                    });
+                }
+            }
+
+            anime({
+                targets: targetLayer,
+                opacity: [1, 0],
+                duration: 200,
+                easing: 'easeOutQuad',
+                complete: function() {
+                    targetLayer.src = newItemSrc;
+                    targetLayer.style.display = 'block';
+                    console.log(`Target layer (${targetLayer.id}) src updated to ${newItemSrc}, display block.`);
+                    anime({
+                        targets: targetLayer,
+                        opacity: [0, 1],
+                        duration: 300,
+                        easing: 'easeInQuad',
+                        complete: () => {
+                            console.log(`Target layer (${targetLayer.id}) faded in.`);
+                        }
+                    });
+                }
+            });
+            dressedItemsMap.set(itemType, droppedItemElement);
+            console.log(`DressedItemsMap updated: ${itemType} -> ${droppedItemElement.id}`);
+
+        } else {
+            console.warn(`Warning: No overlay layer found for item type: ${itemType}`);
+        }
+    }
+
+  
+    function resetOutfit() {
+        console.log('Resetting outfit...');
+        for (const type in overlayLayers) {
+            if (overlayLayers.hasOwnProperty(type)) {
+                const layer = overlayLayers[type];
+                if (layer.src && layer.src !== characterBaseImage.src && layer.style.opacity > 0) {
+                    anime({
+                        targets: layer,
+                        opacity: [1, 0],
+                        duration: 300,
+                        easing: 'easeOutQuad',
+                        complete: function() {
+                            layer.style.display = 'none';
+                            console.log(`Overlay layer (${layer.id}) hidden.`);
+                        }
+                    });
+                }
+            }
+        }
+        console.log('Character outfit layers reset.');
+
+        draggableItems.forEach(item => {
+            const initialStyles = initialDraggableStyles.get(item.id);
+            if (initialStyles) {
+                const currentParent = item.parentNode;
+                if (currentParent === document.body) {
+                    document.body.removeChild(item);
+                    console.log(`Removed item (${item.id}) from body during reset.`);
+                }
+                const itemOriginalParentContainer = document.querySelector('.draggable-items-scaling-wrapper');
+                if (itemOriginalParentContainer) {
+                    itemOriginalParentContainer.appendChild(item);
+                    console.log(`Appended item (${item.id}) back to its original parent during reset.`);
+                } else {
+                    console.warn(`Could not find original parent (.draggable-items-scaling-wrapper) for ${item.id} during reset.`);
+                }
+
+                item.style.removeProperty('width');
+                item.style.removeProperty('height');
+                item.style.removeProperty('object-fit');
+                item.style.removeProperty('transform'); 
+                console.log(`Removed inline styles from item (${item.id}) during reset.`);
+
+                anime({
+                    targets: item,
+                    left: initialStyles.left,
+                    top: initialStyles.top,
+                    right: initialStyles.right,
+                    bottom: initialStyles.bottom,
+                    opacity: 1,
+                    scale: 1,
+                    duration: 500,
+                    easing: 'easeOutQuad',
+                    complete: function() {
+                        item.style.position = initialStyles.position;
+                        item.style.left = initialStyles.left;
+                        item.style.top = initialStyles.top;
+                        item.style.right = initialStyles.right;
+                        item.style.bottom = initialStyles.bottom;
+                        item.style.display = initialStyles.display;
+                        item.style.zIndex = initialStyles.zIndex;
+                        item.style.pointerEvents = initialStyles.pointerEvents;
+                        item.style.transform = initialStyles.transform || '';
+                        console.log(`Item (${item.id}) restored to initial state after reset.`);
+                    }
+                });
+            }
+        });
+        dressedItemsMap.clear();
+        console.log('DressedItemsMap cleared.');
+
+        console.log('Outfit and draggable items have been reset.');
+    }
+
+
+    function setupAndStartTextWaveAnimation() {
+        const animatedTextContainer = document.getElementById('animatedTextContainer');
+        if (!animatedTextContainer) return;
+
+        const text = animatedTextContainer.textContent;
+        animatedTextContainer.textContent = '';
+
+        let letters = text.split('').map(letter => {
+            let span = document.createElement('span');
+            span.textContent = letter;
+            span.style.display = 'inline-block';
+            span.style.minWidth = '0.5em';
+            animatedTextContainer.appendChild(span);
+            return span;
+        });
+
+        anime({
+            targets: letters,
+            translateY: [
+                { value: -10, easing: 'easeInOutSine', duration: 300 },
+                { value: 0, easing: 'easeInOutSine', duration: 300 }
+            ],
+            delay: anime.stagger(50),
+            loop: true,
+            direction: 'alternate',
+            easing: 'easeInOutQuad'
+        });
+        console.log('Text wave animation initiated.');
+    }
+
+
+    function startScrollIconBlinkAnimation() {
+        anime({
+            targets: '#scrollIcon',
+            opacity: [1, 0.2, 1],
+            easing: 'easeInOutQuad',
+            duration: 1000,
+            loop: true
+        });
+        console.log('Scroll icon blink animation initiated.');
+    }
+
+    // =====================================================================
+    // 옷입히기 게임 스크립트 끝
+    // =====================================================================
+
+
+    function handleHeartClick() {
+        console.log("Heart clicked!");
+        if (isHeartClickedInProgress) {
+            console.log("Heart click in progress, ignoring.");
+            return;
+        }
+        isHeartClickedInProgress = true;
+
+        heartIcon.classList.add('filled');
+        thankYouText.textContent = 'Thank you!';
+        anime({
+            targets: thankYouText,
+            opacity: 1,
+            duration: 200,
+            easing: 'linear'
+        });
+        console.log('Heart icon filled and "Thank you!" text shown.');
+
+        setTimeout(() => {
+            heartIcon.classList.remove('filled');
+            anime({
+                targets: thankYouText,
+                opacity: 0,
+                duration: 300,
+                easing: 'linear',
+                complete: () => {
+                    thankYouText.textContent = '';
+                    console.log('Heart icon reset and "Thank you!" text hidden.');
+                }
+            });
+            isHeartClickedInProgress = false;
+        }, 500);
+    }
+</script>
+</body>
+</html>
